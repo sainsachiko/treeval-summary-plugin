@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Plugin-Id: treeval-summary
+Plugin-Version: 0.0.1
+Plugin-Class: nextflow.summary.SummaryPlugin
+Plugin-Provider: nextflow
+Plugin-Requires: >=23.10.0
