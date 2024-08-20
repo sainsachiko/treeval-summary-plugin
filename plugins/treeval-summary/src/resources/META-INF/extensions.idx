@@ -1,1 +1,2 @@
-nextflow.summary.SummaryExtension
+nextflow.treevalsummary.TreevalSummaryFactory
+nextflow.treevalsummary.TreevalSummaryExtension

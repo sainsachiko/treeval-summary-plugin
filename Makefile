@@ -2,6 +2,7 @@
 config ?= compileClasspath
 version ?= $(shell grep 'Plugin-Version' plugins/treeval-summary/src/resources/META-INF/MANIFEST.MF | awk '{ print $$2 }')
 
+
 ifdef module 
 mm = :${module}:
 else 

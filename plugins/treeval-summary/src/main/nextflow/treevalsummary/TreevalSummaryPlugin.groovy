@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package nextflow.Summary
+package nextflow.treevalsummary
 
 import groovy.transform.CompileStatic
 import nextflow.plugin.BasePlugin
@@ -22,14 +22,14 @@ import nextflow.plugin.Scoped
 import org.pf4j.PluginWrapper
 
 /**
- * Implements the Summary plugins entry point
+ * Implements the summary plugins entry point
  *
  * @author Paolo Di Tommaso <paolo.ditommaso@gmail.com>
  */
 @CompileStatic
-class SummaryPlugin extends BasePlugin {
+class TreevalSummaryPlugin extends BasePlugin {
 
-    SummaryPlugin(PluginWrapper wrapper) {
+    TreevalSummaryPlugin(PluginWrapper wrapper) {
         super(wrapper)
     }
 }

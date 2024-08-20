@@ -1,4 +1,4 @@
-package nextflow.Summary
+package nextflow.treevalsummary
 
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
@@ -12,28 +12,58 @@ import nextflow.plugin.extension.Factory
 import nextflow.plugin.extension.Function
 import nextflow.plugin.extension.Operator
 import nextflow.plugin.extension.PluginExtensionPoint
+import nextflow.script.WorkflowMetadata
+import nextflow.script.ScriptBinding.ParamsMap
 
 import java.time.OffsetDateTime
 import java.time.Duration
 
 /**
- * Example showing how to implement treeval-summary function
+ * Example plugin extension showing how to implement a basic
+ * channel factory method, a channel operator and a custom function.
+ *
+ * @author : jorge <jorge.aguilera@seqera.io>
+ *
  */
-class SummaryExtension extends PluginExtensionPoint {
+@Slf4j
+@CompileStatic
+class TreevalSummaryExtension extends PluginExtensionPoint {
+
+    private Session session
 
     @Override
-    void init(Session session) {}
-    
+    protected void init(Session session) {
+        this.session = session
+    }
+
+    @Function 
+    String version(WorkflowMetadata workflow) {
+        String version_string = ""
+
+        if (workflow.manifest.version) {
+            def prefix_v = workflow.manifest.version[0] != 'v' ? 'v' : ''
+            version_string += "${prefix_v}${workflow.manifest.version}"
+        }
+
+        if (workflow.commitId) {
+            def git_shortsha = workflow.commitId.substring(0, 7)
+            version_string += "-g${git_shortsha}"
+        }
+
+        return version_string
+    }
+
     @Function
-    void TreevalSummary(Session session, params, Map metrics) {
+    void summary(WorkflowMetadata workflow, ParamsMap params, LinkedHashMap metrics) {
+
         def date_completed = OffsetDateTime.now()
 
         def input_data = [:]
-        input_data['version']           = NfcoreTemplate.version( workflow )
-        input_data['runName']           = session.runName
-        input_data['session_id']        = session.sessionId
-        input_data['duration']          = Duration.between( session.start, date_completed ).toSeconds()
-        input_data['DateStarted']       = session.start
+        input_data['version']           = version( workflow )
+        input_data['runName']           = workflow.runName
+        input_data['session_id']        = workflow.sessionId
+        input_data['duration']          = Duration.between( workflow.start, date_completed ).toSeconds()
+        input_data['DateStarted']       = workflow.start
         input_data['DateCompleted']     = date_completed
         input_data['entry']             = params.entry
 
