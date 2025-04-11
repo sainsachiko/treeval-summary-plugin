@@ -51,6 +51,12 @@ plugins {
 
 workflow
 
+Function `summary` gather run log data and store that in a DuckDB. This function could be used as:
+
 ```
 include { summary } from 'plugin/treeval-summary'
+
+summary( workflow, params, metrics, dbPath)
 ```
+
+Where metrics is information related to input data and dbPath is path to existing/desired duckdb to store log data.

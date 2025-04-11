@@ -54,6 +54,9 @@ ext{
 }
 
 dependencies {
+    // DuckDB JDBC driver
+    implementation 'org.duckdb:duckdb_jdbc:0.10.2'
+
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     compileOnly "io.nextflow:nextflow:$nextflowVersion"
     compileOnly 'org.slf4j:slf4j-api:1.7.10'
