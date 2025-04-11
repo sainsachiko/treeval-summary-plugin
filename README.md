@@ -1,6 +1,6 @@
 # treeval-summary plugin
 
-This project contains a simple Nextflow plugin called `treeval-summary` to summary metadata and trace of a nextflow run.
+This project contains a simple Nextflow plugin called `treeval-summary` to summary metadata and trace of a nextflow run, then store it in a defined DuckDB with 02 tables (meta and trace).
 
 ## Plugin structure
 
